@@ -1,4 +1,3 @@
 import requests
-
-r = requests.get("https://www.nasdaq.com/market-activity/stocks/aapl/historical")
-print(r)
+import pandas as pd
+import bs4
