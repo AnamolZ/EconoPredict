@@ -27,4 +27,4 @@ for row_tag in data_rows:
     df_length = len(df)
     df.loc[df_length] = row_data
 
-print(df)
+print(type(df))
