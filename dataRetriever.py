@@ -1,3 +1,4 @@
 import requests
 
-r = 
+r = requests.get("")
+print(r)
