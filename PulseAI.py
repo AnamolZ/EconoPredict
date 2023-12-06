@@ -6,7 +6,6 @@ import pandas as pd
 loaded_model = load_model("LSTMmodel")
 
 new_data_df = pd.read_csv("GOOG.csv", index_col=0)
-print(new_data_df)
 new_data_df['date'] = pd.to_datetime(new_data_df.index)
 
 min_max_scaler = MinMaxScaler(feature_range=(0, 1))
