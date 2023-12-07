@@ -4,6 +4,8 @@ from fake_useragent import UserAgent
 import pandas as pd
 import os
 
+# symbols = ['AMZN', 'GOOGL', 'TSLA', 'NFLX', 'META', 'AMZN', 'AMD', 'UBER']
+
 def func():
     TrainningData = "TrainningData.csv" 
     os.remove(TrainningData) if os.path.exists(TrainningData) else None
