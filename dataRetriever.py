@@ -9,6 +9,7 @@ import os
 def func():
     TrainningData = "TrainningData.csv" 
     os.remove(TrainningData) if os.path.exists(TrainningData) else None
+    
     url = "https://finance.yahoo.com/quote/GOOG/history?p=GOOG"
 
     column_headers = []
