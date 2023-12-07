@@ -42,5 +42,3 @@ def func():
     df_rdc.columns = ['Date', 'Open', 'High', 'Low', 'Close', 'Adj Close', 'Volume']
     df_rdc.to_csv('TrainningData.csv', index=False)
     return df_rdc["Close"][len(df_rdc)-1]
-
-func()
