@@ -6,7 +6,7 @@ from sklearn.linear_model import LogisticRegression
 from keras.models import Sequential
 from keras.layers import LSTM, Dense
 
-data_df = pd.read_csv("TSLA.csv", index_col=0)
+data_df = pd.read_csv("TrainningData.csv", index_col=0)
 data_df['date'] = pd.to_datetime(data_df.index)
 
 scaler = MinMaxScaler(feature_range=(0, 1))
