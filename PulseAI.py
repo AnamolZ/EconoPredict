@@ -6,7 +6,7 @@ import os
 from dataRetriever import func
 
 def PulseAI(req):
-    loaded_model = load_model("LSTMmodel")
+    loaded_model = load_model("LSTMmodel.h5")
 
     initial_price = func(req)
     TrainningData = "TrainningData.csv" 
@@ -36,4 +36,4 @@ def PulseAI(req):
         print("NDU")
         pass
 
-    os.remove(TrainningData) if os.path.exists(TrainningData) else None   
+    os.remove(TrainningData) if os.path.exists(TrainningData) else None
