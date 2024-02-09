@@ -24,12 +24,6 @@ The core of EconoPredict lies in its ability to analyze historical data and calc
 7. **User Empowerment:**
    - EconoPredict is meticulously crafted to empower investors. The user-friendly interface, coupled with sophisticated data analysis, provides a seamless experience for users of varying expertise levels. The platform's goal is to democratize financial insights, making them accessible to a broad audience.
 
-### Docker Installation
-   ```bash
-docker pull err0rz/econ
-docker run -p 127.0.0.1:8000:8000 err0rz/econ:latest
-```
-
 ### Installation
 1. Clone the repository: `git clone https://github.com/AnamolZ/EconoPredict.git`
 2. Install the required dependencies: `pip install -r requirements.txt`
