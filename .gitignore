@@ -1,2 +1,3 @@
 __pycache__/
-gitignore.txtZone.Identifier
+.vscode/
+venv/

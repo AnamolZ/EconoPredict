@@ -3,37 +3,51 @@ from sklearn.preprocessing import MinMaxScaler
 import numpy as np
 import pandas as pd
 import os
-from dataRetriever import func
+from priceScrappy import StockPrice
 
-def PulseAI(req):
-    loaded_model = load_model("LSTMmodel.h5")
+class LoadingModel(StockPrice):
+    def __init__(self, stock_symbol, input_data_path, trained_model):
+        super().__init__(stock_symbol)
 
-    initial_price = func(req)
-    TrainningData = "TrainningData.csv" 
-    new_data_df = pd.read_csv("TrainningData.csv", index_col=0)
-    new_data_df['date'] = pd.to_datetime(new_data_df.index)
+        self.stock_symbol = stock_symbol
+        self.input_data_path = input_data_path
+        self.trained_model = trained_model
+        self.model = load_model(self.trained_model)
 
-    min_max_scaler = MinMaxScaler(feature_range=(0, 1))
-    min_max_scaler.fit_transform(new_data_df['Close'].values.reshape(-1, 1))
+        self.predicted_price = None
+        self.initial_price = float(self.scrape_price())
 
-    new_dataset = min_max_scaler.transform(new_data_df['Close'].values.reshape(-1, 1))
-    x_new = np.reshape(new_dataset[-15:], (1, 1, 15))
+        self.process_data()
+        # Update predicted price
+        self.predicted_price = self.predicting_value()
+    
+    def predicting_value(self):
+        input_data_frame = pd.read_csv(self.input_data_path, index_col=0)
+        input_data_frame['date'] = pd.to_datetime(input_data_frame.index)
 
-    new_predictions = loaded_model.predict(x_new)
-    new_predictions = min_max_scaler.inverse_transform(new_predictions)
+        scaler = MinMaxScaler((0, 1))
+        scaled_data = scaler.fit_transform(input_data_frame['Close'].values.reshape(-1, 1))
 
-    last_date = new_data_df['date'].iloc[-1]
-    next_day_date = last_date + pd.DateOffset(days=1)
-    final_price = new_predictions[0, 0]
-    percentage_change = ((final_price - initial_price) / initial_price) * 100
+        data_reshape = np.reshape(scaled_data[-15:], (1, 1, 15))
+        prediction = self.model.predict(data_reshape)
+        self.predicted_price = scaler.inverse_transform(prediction)[0, 0]
 
-    if percentage_change < 0:
-        return (f'Price {new_predictions[0, 0]:.2f} ↟Up {abs(percentage_change):.2f}%')
+        return self.predicted_price
 
-    elif percentage_change > 0:
-        return (f'Price {new_predictions[0, 0]:.2f} ↯Down {abs(percentage_change):.2f}%')
-    else:
-        print("NDU")
-        pass
+    def percentage_change(self):
+        percentage_change = ((self.predicted_price - self.initial_price) / self.initial_price) * 100
 
-    os.remove(TrainningData) if os.path.exists(TrainningData) else None
+        if percentage_change > 0:
+            return f'↟Up {percentage_change:.2f}%'
+        elif percentage_change < 0:
+            return f'↯Down {abs(percentage_change):.2f}%'
+        else:
+            return "No significant change"
+
+        if os.path.exists(self.input_data_path):
+            os.remove(self.input_data_path)
+
+# For Manual Testing
+if __name__ == "__main__":
+    LoadingModel = LoadingModel("AMZN","TrainingData.csv","LSTMmodel.h5")
+    print(LoadingModel.percentage_change())

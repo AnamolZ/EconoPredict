@@ -3,140 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="static/style.css">
-    <script defer src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <title>Dashboard</title>
+    <title>Econ Chart</title>
+    <script src="https://s3.tradingview.com/tv.js"></script>
+    <link rel="stylesheet" href="../static/style.css">
 </head>
 <body>
-    <section class="container forms">
-        <button id="loginButton" class="icon-button">Login</button>
-        
-        <!-- <label for="dropdown">Stock</label> -->
-        <select id="dropdown" onchange="start()">
-            <option value="Default">Default</option>
-            <!-- <option value="AAPL">AAPL</option> -->
-            <option value="AMZN">AMZN</option>
-            <option value="GOOGL">GOOGL</option>
-            <!-- <option value="MSFT">MSFT</option> -->
-            <option value="TSLA">TSLA</option>
-            <option value="GOOG">GOOG</option>
-            <!-- <option value="NVDA">NVDA</option> -->
-            <option value="NFLX">NFLX</option>
-        </select>
-
-        <div class="form login" id="fl">
-            <div class="form-content">
-                <header id="loginHeader">Login</header>
-
-                <form onsubmit="logging(event)">
-                    <div class="field input-field">
-                        <input type="email" id="emailInput" placeholder="Email" class="input" required>
-                    </div>
-
-                    <div class="field input-field">
-                        <input type="password" id="passwordInput" placeholder="Password" class="password" required>
-                        <i class='bx bx-hide eye-icon'></i>
-                    </div>
-
-                    <div class="form-link">
-                        <a href="#" class="forgot-pass">Forgot password?</a>
-                    </div>
-
-                    <div class="field button-field">
-                        <button type="submit">Login</button>
-                    </div>
-                </form>
-
-                <div class="form-link">
-                    <span>Don't have an account? <button type="submit" onclick="showSignForm()" id="SignupButton">Signup</button></span>
-                </div>
-            </div>
-
-            <div class="line"></div>
-
-            <div class="media-options">
-                <a href="#" class="field google">
-                    <img src="#" alt="" class="google-img">
-                    <span>Login with Google</span>
-                </a>
-            </div>
-        </div>
-
-        <div class="form signup" id="fs">
-            <div class="form-content">
-                <header id="singupHeader">Signup</header>
-                <form onsubmit="signingup(event)">
-
-                    <div class="field input-field">
-                        <input type="email" id="emailInput1" placeholder="Email" class="input" required>
-                    </div>
-
-                    <div class="field input-field">
-                        <input type="password" id="passwordInput1" placeholder="Create password" class="password" required>
-                    </div>
-
-                    <div class="field input-field">
-                        <input type="password" id="passwordInput2" placeholder="Confirm password" class="password" required>
-                        <i class='bx bx-hide eye-icon'></i>
-                    </div>
-
-                    <div class="field button-field">
-                        <button type="submit" id="signupButton">Signup</button>
-                    </div>
-                </form>
-
-                <div class="form-link">
-                    <span>Already have an account? <button type="submit" onclick="showLoginForm()" id="SignupButton">Login</button></span>
-                </div>
-            </div>
-
-            <div class="line"></div>
-
-            <div class="media-options">
-                <a href="#" class="field google">
-                    <img src="#" alt="" class="google-img">
-                    <span>Login with Google</span>
-                </a>
-            </div>
-        </div>
-
-        <div class="form verification" id="fv">
-            <div class="form-content">
-                <header id="verificationHeader">Verification</header>
-                <form onsubmit="verification(event)">
-
-                    <div class="field input-field">
-                        <input type="text" id="verificationCode" placeholder="Verification Code" required>
-                    </div>
-
-                    <div class="field button-field">
-                        <button type="submit" id="verifyButton">Verify</button>
-                    </div>
-                </form>
-
-                <div class="form-link">
-                    <span>Already have an account? <button type="submit" onclick="showLoginForm()" id="SignupButton">Login</button></span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <div class="container">
-        <section id="chartSection">
-            <div class="chart-container">
-                <canvas id="stockChart"></canvas>
-                <canvas id="weekChart"></canvas>
-            </div>
-            <div class="loading" id="loading">Loading...</div>
-        </section>
+    <div class="trading_view-widget-container">
+        <div class="prediction" id="prediction"></div>
+        <div id="tradingview_chart"></div>
     </div>
-    
-    <p id="pre">{{ Prediction }}</p>
-    
-    <footer>
-        <p>&copy; 2023 Stock Swift</p>
-    </footer>
 
-    <script defer src="static/script.js"></script>
+    <script src="../static/script.js"></script>
 </body>
 </html>
